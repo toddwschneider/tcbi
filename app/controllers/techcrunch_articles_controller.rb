@@ -1,5 +1,5 @@
 class TechcrunchArticlesController < ApplicationController
-  before_filter :set_headers
+  before_filter :set_headers, :only => [:data]
 
   def data
     data = cache 'tcbi-total', :expires_in => 15.minutes do
@@ -21,5 +21,6 @@ class TechcrunchArticlesController < ApplicationController
 
   def set_headers
     headers['Access-Control-Allow-Origin'] = '*'
+    headers['Cache-Control'] = 'public, max-age=#{15.minutes}'
   end
 end
