@@ -10,4 +10,7 @@ gem 'heroku'
 gem 'rails_12factor', group: :production
 gem 'newrelic_rpm'
 
+gem 'uglifier', '2.5.3'
+gem 'sass-rails', '4.0.4'
+
 ruby "2.1.5"
