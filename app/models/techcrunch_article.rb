@@ -256,7 +256,7 @@ class TechcrunchArticle < ActiveRecord::Base
         ORDER BY seq.date
       SQL
 
-      find_by_sql([qry, window_in_days, start_date, amount_cutoff]).
+      find_by_sql([qry, window_in_days - 1, start_date, amount_cutoff]).
         map { |r| [r.date.to_datetime.to_i * 1000, r.count90.to_i] }
     end
   end
