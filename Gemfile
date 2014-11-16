@@ -13,4 +13,6 @@ gem 'newrelic_rpm'
 gem 'uglifier', '2.5.3'
 gem 'sass-rails', '4.0.4'
 
+gem 'pry', group: :development
+
 ruby "2.1.5"

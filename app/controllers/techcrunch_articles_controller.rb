@@ -2,12 +2,7 @@ class TechcrunchArticlesController < ApplicationController
   before_filter :set_headers
 
   def data
-    unless request.xhr?
-      redirect_to redirect_url, :status => :found
-      return
-    end
-
-    data = cache 'tcbi-total', :expires_in => 30.minutes do
+    data = cache 'tcbi-total', :expires_in => 15.minutes do
       TechcrunchArticle.running_total
     end
 

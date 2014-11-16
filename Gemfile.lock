@@ -30,6 +30,7 @@ GEM
     addressable (2.3.6)
     arel (5.0.1.20140414130214)
     builder (3.2.2)
+    coderay (1.1.0)
     curb (0.8.6)
     dalli (2.7.2)
     erubis (2.7.0)
@@ -59,6 +60,7 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
+    method_source (0.8.2)
     mime-types (2.4.3)
     mini_portile (0.6.1)
     minitest (5.4.3)
@@ -68,6 +70,10 @@ GEM
     nokogiri (1.6.4.1)
       mini_portile (~> 0.6.0)
     pg (0.17.1)
+    pry (0.10.1)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
+      slop (~> 3.4)
     rack (1.5.2)
     rack-test (0.6.2)
       rack (>= 1.0)
@@ -104,6 +110,7 @@ GEM
       sprockets (~> 2.8, < 2.12)
       sprockets-rails (~> 2.0)
     sax-machine (1.0.3)
+    slop (3.6.0)
     sprockets (2.11.3)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -135,9 +142,10 @@ DEPENDENCIES
   heroku
   newrelic_rpm
   pg (= 0.17.1)
+  pry
   rack-timeout (= 0.1.0)
   rails (= 4.1.7)
   rails_12factor
-  sass-rails
-  uglifier
+  sass-rails (= 4.0.4)
+  uglifier (= 2.5.3)
   unicorn (= 4.8.3)
