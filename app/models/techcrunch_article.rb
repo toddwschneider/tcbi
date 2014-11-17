@@ -238,7 +238,7 @@ class TechcrunchArticle < ActiveRecord::Base
 
     def running_total(opts = {})
       window_in_days = opts.fetch(:window_in_days, 90).to_i
-      start_date = opts.fetch(:start_date, '2006-01-01').to_date
+      start_date = opts.fetch(:start_date, '2005-06-11').to_date
       amount_cutoff = opts.fetch(:amount_cutoff, 150_000_000).to_i
 
       qry = <<-SQL
@@ -250,7 +250,7 @@ class TechcrunchArticle < ActiveRecord::Base
             LEFT JOIN
               (SELECT date(published_at) AS date, COUNT(*) AS count
               FROM techcrunch_articles
-              WHERE story_type = 'fundraise' AND COALESCE(amount, 0) < ?
+              WHERE story_type = 'fundraise' AND COALESCE(dollar_amount, 0) < ?
               GROUP BY date) data
             ON seq.date = data.date
         ORDER BY seq.date
