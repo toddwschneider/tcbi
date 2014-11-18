@@ -30,7 +30,7 @@ class TechcrunchArticle < ActiveRecord::Base
     (\svaluation)?
   }xi
 
-  FUNDRAISE_REGEX_1 = %r{(?:gets|takes|nabs|injects|lands|announces|scores).{0,20}?#{AMOUNT_REGEX}\s(?:from|via|led|round|funding|fundraise|in\sfunding)}xi
+  FUNDRAISE_REGEX_1 = %r{(?:gets|takes|nabs|injects|lands|announces|scores|secures).{0,20}?#{AMOUNT_REGEX}\s(?:from|via|led|round|funding|fundraise|in\sfunding)}xi
   FUNDRAISE_REGEX_2 = %r{(?:(?<!could\s)raise(?!\.com)|raises|raised|raising).{0,20}?#{AMOUNT_REGEX}}xi
   FUNDRAISE_REGEX_3 = %r{(?:invests|puts).{0,20}?#{AMOUNT_REGEX}(?:\sin|$)}xi
   FUNDRAISE_REGEXES = [FUNDRAISE_REGEX_1, FUNDRAISE_REGEX_2, FUNDRAISE_REGEX_3]
@@ -258,6 +258,23 @@ class TechcrunchArticle < ActiveRecord::Base
 
       find_by_sql([qry, window_in_days - 1, start_date, amount_cutoff]).
         map { |r| [r.date.to_datetime.to_i * 1000, r.count90.to_i] }
+    end
+
+    # for some reason there are a bunch of cases of duplicated headlines differing only by capitalization
+    # the dupes have urls that end in digits, e.g. -2/, -3/, etc
+    def delete_dupes
+      qry = <<-SQL
+        SELECT date(published_at) AS d, LOWER(title) AS t, COUNT(*)
+        FROM techcrunch_articles
+        GROUP BY d, t
+        HAVING COUNT(*) > 1
+      SQL
+
+      find_by_sql(qry).each do |record|
+        where("date(published_at) = ? AND LOWER(title) = ?", record.d, record.t).each do |article|
+          article.destroy if article.url =~ /-\d\/$/
+        end
+      end
     end
   end
 end
