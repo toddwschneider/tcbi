@@ -21,6 +21,6 @@ class TechcrunchArticlesController < ApplicationController
 
   def set_headers
     headers['Access-Control-Allow-Origin'] = '*'
-    headers['Cache-Control'] = 'public, max-age=#{15.minutes}'
+    headers['Cache-Control'] = "public, max-age=#{15.minutes}"
   end
 end
