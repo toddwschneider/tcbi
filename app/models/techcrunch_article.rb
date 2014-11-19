@@ -30,7 +30,7 @@ class TechcrunchArticle < ActiveRecord::Base
     (\svaluation)?
   }xi
 
-  FUNDRAISE_REGEX_1 = %r{(?:gets|takes|nabs|injects|lands|announces|scores|secures|pulls\sin).{0,20}?#{AMOUNT_REGEX}\s(?:from|via|led|round|funding|fundraise|in\sfunding)}xi
+  FUNDRAISE_REGEX_1 = %r{(?:gets|takes|nabs|injects|lands|announces|scores|secures|pulls\sin|closes).{0,20}?#{AMOUNT_REGEX}\s(?:from|via|led|round|funding|fundraise|in\sfunding|seed|series)}xi
   FUNDRAISE_REGEX_2 = %r{(?:(?<!could\s)raise(?!\.com)|raises|raised|raising).{0,20}?#{AMOUNT_REGEX}}xi
   FUNDRAISE_REGEX_3 = %r{(?:invests|puts).{0,20}?#{AMOUNT_REGEX}(?:\sin|$)}xi
   FUNDRAISE_REGEXES = [FUNDRAISE_REGEX_1, FUNDRAISE_REGEX_2, FUNDRAISE_REGEX_3]
